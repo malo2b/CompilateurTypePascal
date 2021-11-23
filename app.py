@@ -13,8 +13,6 @@ pcode = ["INT 2",
         "LDA 0" ,
         "LDV" ,
         "LDI 0" ,
-        "LDV" ,
-        "LDI 0" ,
         "EQL" ,
         "BZE 1" ,
         "LDA 1" ,
@@ -25,11 +23,13 @@ pcode = ["INT 2",
 def interpreteur_pcode(pcode):
     pc = 0 # Compteur d'instruction
     sp = 0 # Pointeur de somet de pile
-    mem = [None]*100 # Pile
+    mem = [None]*10 # Pile
 
 
     while pcode[pc] != "HLT":
-        pcode[pc] = pcode[pc].split (" ")
+        print(mem)
+        if type(pcode[pc]) == str:
+            pcode[pc] = pcode[pc].split(" ")
         print(pcode[pc])
 
         if pcode[pc][0] == "ADD":
@@ -57,6 +57,7 @@ def interpreteur_pcode(pcode):
         elif pcode[pc][0] == "INN":
             INN(mem)
         elif pcode[pc][0] == "INT":
+            INT(mem, pcode[pc][1], sp)
             sp += int(pcode[pc][1])
         elif pcode[pc][0] == "LDI":
             LDI(mem, int(pcode[pc][1]))
@@ -70,8 +71,8 @@ def interpreteur_pcode(pcode):
             pc = int(pcode[pc][1])
         elif pcode[pc][0] == "BZE":
             if mem[-1] == 0:
-                pc = int(pcode[pc][1])
-                mem.pop(-1)
+                pc = int(pcode[pc][1])-1 # -1 car réincrémenté a la fin du corp de la boucle
+                del(mem[-1])
         elif pcode[pc] == "HLT":
             HLT()
 

@@ -40,15 +40,17 @@ def DIV(pile:list):
     pile[len(pile)-1] = res
 
 def EQL(pile:list):
-    """Laisse 1 au sommet si sous-sommet == sommet, 0 sinon
+    """Remplace le sous-sommet par 1 si sous-sommet == sommet, 0 sinon
 
     Args:
         pile (list): Pile
     """
     if pile[-1] == pile[-2]:
-        pile.append(1)
+        pile[-2] = 1
+        del(pile[-1])
     else:
-        pile.append(0)
+        pile[-2] = 0
+        del(pile[-1])
 
 def NEQ(pile:list):
     """Laisse 1 au sommet si sous-sommet != sommet, 0 sinon
@@ -57,9 +59,11 @@ def NEQ(pile:list):
         pile (list): Pile
     """
     if pile[-1] != pile[-2]:
-        pile.append(1)
+        pile[-2] = 1
+        pile.pop(-1)
     else:
-        pile.append(0)
+        pile[-2] = 0
+        pile.pop(-1)
 
 def GTR(pile:list):
     """Laisse 1 au sommet si sous-sommet > sommet, 0 sinon
@@ -68,9 +72,11 @@ def GTR(pile:list):
         pile (list): Pile
     """
     if pile[-2] > pile[-1]:
-        pile.append(1)
+        pile[-2] = 1
+        pile.pop(-1)
     else:
-        pile.append(0)
+        pile[-2] = 0
+        pile.pop(-1)
 
 def LSS(pile:list):
     """Laisse 1 au sommet si sous-sommet < sommet, 0 sinon
@@ -79,9 +85,11 @@ def LSS(pile:list):
         pile (list): Pile
     """
     if pile[-2] < pile[-1]:
-        pile.append(1)
+        pile[-2] = 1
+        pile.pop(-1)
     else:
-        pile.append(0)
+        pile[-2] = 0
+        pile.pop(-1)
 
 def GEQ(pile:list):
     """Laisse 1 au sommet si sous-sommet >= sommet, 0 sinon
@@ -90,9 +98,11 @@ def GEQ(pile:list):
         pile (list): Pile
     """
     if pile[-2] >= pile[-1]:
-        pile.append(1)
+        pile[-2] = 1
+        pile.pop(-1)
     else:
-        pile.append(0)
+        pile[-2] = 0
+        pile.pop(-1)
 
 def LEQ(pile:list):
     """Laisse 1 au sommet si sous-sommet <= sommet, 0 sinon
@@ -101,9 +111,11 @@ def LEQ(pile:list):
         pile (list): Pile
     """
     if pile[-2] <= pile[-1]:
-        pile.append(1)
+        pile[-2] = 1
+        pile.pop(-1)
     else:
-        pile.append(0)
+        pile[-2] = 0
+        pile.pop(-1)
 
 def PRN(pile:list):
     """Imrpime le sommet, depile
@@ -126,17 +138,20 @@ def INN(pile:list):
             break
         except ValueError:
             print("Veuillez saisir une valeur correcte")
-    pile[len(pile)-1] = value
+    pile[pile[-1]] = value
     pile.pop(-1)
 
-def INT(sp:int, c:int):
+def INT(pile:list, inc:int, sp:int):
     """Incrémente de la constante c le pointeur de la pile (la constante c peut être négative)
-
-    Args:
-        sp (int): Stack Pointeur (pointeur de la pile)
-        c (int): Constante positive ou négative
     """
-    return sp + c
+    i = sp
+    if int(inc) > 0:
+        while i <  sp + int(inc):
+            pile[i] = 0
+            i+=1;
+    # elif inc < 0:
+    #     while i > inc:
+    #         pile[]
 
 def LDI(pile:list, v):
     """Empile la valeur v
@@ -162,7 +177,7 @@ def LDV(pile:list):
     Args:
         pile (list): Pile
     """
-    pile[-1] = pile[len(pile)-1]
+    pile[-1] = pile[pile[-1]]
 
 def STO(pile:list):
     """Stocke la valeur au sommet à l'adresse indiquée par le sous-sommet, dépile 2 fois
