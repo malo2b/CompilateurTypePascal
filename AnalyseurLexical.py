@@ -5,22 +5,25 @@ def analyseur_lexical(fichier:str):
             for lettre in ligne:
                 if lettre== ";":
                     code += " ; "
+                elif lettre=="\n":
+                    code+= " "
                 else:
                     code += lettre
 
-    code = code.split(" ")
-    print(code)
-    # instructions = []
-    # instruction_courante = []
-    # for mot in code:
-    #     if mot == ";":
-    #         instruction_courante.append(";")
-    #         instructions.append(instruction_courante)
-    #         instruction_courante = []
-    #     else:
-    #         instruction_courante.append(mot)
-    # instructions.append(instruction_courante)
-    # print(instructions)
+    code=code.split(" ")
+    code=[value for value in code if value != '']
+    #print(code)
+    instructions = []
+    instruction_courante = []
+    for mot in code:
+        if mot == ";":
+            instruction_courante.append(";")
+            instructions.append(instruction_courante)
+            instruction_courante = []
+        else:
+            instruction_courante.append(mot)
+    instructions.append(instruction_courante)
+    print(instructions)
 
 analyseur_lexical("code.code")
 
