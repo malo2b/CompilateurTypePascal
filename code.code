@@ -1,0 +1,6 @@
+procedure BLOCK ;
+begin
+    if TOKEN = CONST_TOKEN then CONSTS ;
+    if TOKEN = VAR_TOKEN then VARS ;
+    INSTS
+end
