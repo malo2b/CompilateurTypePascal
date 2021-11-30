@@ -1,21 +1,26 @@
 def analyseur_lexical(fichier:str):
-    mots = []
+    code = ""
     with open(fichier,'r') as f:
         for ligne in f:
-            for mot in ligne.split():
-                mots.append(mot)
+            for lettre in ligne:
+                if lettre== ";":
+                    code += " ; "
+                else:
+                    code += lettre
 
-    instructions = []
-    instruction_courante = []
-    for mot in mots:
-        if mot == ";":
-            instruction_courante.append(";")
-            instructions.append(instruction_courante)
-            instruction_courante = []
-        else:
-            instruction_courante.append(mot)
-    instructions.append(instruction_courante)
-    print(instructions)
+    code = code.split(" ")
+    print(code)
+    # instructions = []
+    # instruction_courante = []
+    # for mot in code:
+    #     if mot == ";":
+    #         instruction_courante.append(";")
+    #         instructions.append(instruction_courante)
+    #         instruction_courante = []
+    #     else:
+    #         instruction_courante.append(mot)
+    # instructions.append(instruction_courante)
+    # print(instructions)
 
 analyseur_lexical("code.code")
 
