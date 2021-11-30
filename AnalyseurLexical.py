@@ -1,4 +1,5 @@
 def analyseur_lexical(fichier:str):
+    # Lecture du fichier avec séparation des ; et \n
     code = ""
     with open(fichier,'r') as f:
         for ligne in f:
@@ -10,20 +11,37 @@ def analyseur_lexical(fichier:str):
                 else:
                     code += lettre
 
+    # Séparation des mots et réssemblement des différentes instructions
     code=code.split(" ")
     code=[value for value in code if value != '']
-    #print(code)
     instructions = []
     instruction_courante = []
     for mot in code:
         if mot == ";":
-            instruction_courante.append(";")
+            instruction_courante.append(mot)
             instructions.append(instruction_courante)
+            instruction_courante = []
+        elif mot == "begin" or mot == "end":
+            if instruction_courante != []:
+                instructions.append(instruction_courante)
+            instructions.append([mot])
             instruction_courante = []
         else:
             instruction_courante.append(mot)
-    instructions.append(instruction_courante)
+    code=[instruction for instruction in instructions if instruction != []]
     print(instructions)
+
+    # Analyse du lexique
+
+    for instruction in instructions:
+        # Déclaration variable
+        pass
+
+
+
+
+
+
 
 analyseur_lexical("code.code")
 

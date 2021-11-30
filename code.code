@@ -1,6 +1,14 @@
-procedure BLOCK;
+procedure CHERCHERSYM (var INDEX:TABLEINDEX ; PERMIS:CLASSET) ;
+var FIN : booleen ;
 begin
-    if TOKEN = CONST_TOKEN then CONSTS;
-    if TOKEN = VAR_TOKEN then VARS;
-    INSTS
-end
+INDEX == DERNIERSYM ; FIN := false ;
+while not FIN do begin
+if INDEX = O then FIN = true
+else if TABLESYM [INDEX].NOM =SYM
+then FIN := true
+else INDEX == INDEX - 1
+end;
+if INDEX = O then ERREUR (* SYM absent )
+else if not (TABLESYMINDEX].CLASSE in PERMIS)
+then ERREUR; ( SYM pas de bonne classe *)
+end;
