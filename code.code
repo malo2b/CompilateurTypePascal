@@ -1,14 +1,11 @@
-procedure CHERCHERSYM (var INDEX:TABLEINDEX ; PERMIS:CLASSET) ;
-var FIN : booleen ;
+program p1;
+const C = 1;
+var A, B; (* Ceci est un commentaire *)
+var E, F; (* Ceci est un commentaire *)
 begin
-INDEX == DERNIERSYM ; FIN := false ;
-while not FIN do begin
-if INDEX = O then FIN = true
-else if TABLESYM [INDEX].NOM =SYM
-then FIN := true
-else INDEX == INDEX - 1
-end;
-if INDEX = O then ERREUR (* SYM absent )
-else if not (TABLESYMINDEX].CLASSE in PERMIS)
-then ERREUR; ( SYM pas de bonne classe *)
-end;
+    repeat
+        read(A);
+        B := A + B;
+    until A = 0;
+    write(B); (* Ceci est un commentaire *)
+end .
